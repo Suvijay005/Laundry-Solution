@@ -1,8 +1,10 @@
 package com.app.pojos;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -22,6 +24,7 @@ public class Payment extends BaseEntity {
 	
 	@OneToOne
 	@JoinColumn(name = "order_join")
+	@MapsId
 	private Order order;
 	
 }
