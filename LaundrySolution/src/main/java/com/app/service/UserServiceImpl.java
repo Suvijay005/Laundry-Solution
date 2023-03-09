@@ -3,7 +3,6 @@ package com.app.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,8 +18,7 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserRepository userRepo;
 	
-	@Autowired
-	private PasswordEncoder enc;
+	
 	
 	@Override
 	public List<User> getAllUsers() {
@@ -37,7 +35,7 @@ public class UserServiceImpl implements UserService {
 	if(userRepo.existsByEmail(transientUser.getEmail())){
 		throw new UserAlreadyExistsException("Email already exists!");
 	}
-	transientUser.setPassword(enc.encode(transientUser.getEmail()));
+	transientUser.setPassword(transientUser.getEmail());
 		return userRepo.save(transientUser);
 	}
 	
@@ -58,11 +56,13 @@ public class UserServiceImpl implements UserService {
 		}
 		return "Deletion failed!Invalid id";
 	}
+	 
 	 @Override
-	public void changeRole(Role role, String email) {
+	public boolean changeRole(Role role, String email) {
 		User user = userRepo.findByEmail(email)
 				.orElseThrow(() -> new ResourceNotFoundException("wrong email id"));
 		user.setRole(role);
+		return true;
 		
 	}
 	 

@@ -7,6 +7,8 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Entity
@@ -20,7 +22,7 @@ public class Location extends BaseEntity {
 	private String address;
 	@Column(length = 14)
 	private String phoneNumber;
-	
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name = "orderdeliver")
 	@MapsId

@@ -24,6 +24,12 @@ public class StaffServiceImpl implements StaffService {
 	}
 
 	@Override
+	public Staff getStaffDetails(Long id) {
+
+		return staffRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Invalid id!"));
+	}
+
+	@Override
 	public Staff addStaff(Staff transientStaff) {
 		return staffRepo.save(transientStaff);
 	}
@@ -44,8 +50,5 @@ public class StaffServiceImpl implements StaffService {
 		}
 		throw new ResourceNotFoundException("Invalid id!");
 	}
-	
-	
-	
 
 }

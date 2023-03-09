@@ -18,6 +18,7 @@ public class OrderServiceImpl implements OrderService{
 
 	@Autowired
 	private OrderRepository orderRepo;
+	
 	@Override
 	public List<Order> getAllOrders() {
 		return orderRepo.findAll();
@@ -57,7 +58,7 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public List<Order> getOrdersByDeliveryupDate(LocalDateTime deliverydate1) {
 		
-		return orderRepo.findByDeliveryDate(deliverydate1);
+		return orderRepo.findByDeliveryDateBetween(deliverydate1, deliverydate1.plusDays(1));
 	}
 	
 	

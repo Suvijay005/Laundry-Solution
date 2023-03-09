@@ -11,6 +11,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Entity
@@ -31,7 +33,7 @@ public class User extends BaseEntity {
 	@Column(name = "role", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Role role;
-	
+	@JsonIgnore
 	@OneToMany (mappedBy = "user" ,cascade = CascadeType.ALL,orphanRemoval = true)
 	private List<Order>orderlist=new ArrayList<Order>();
 	

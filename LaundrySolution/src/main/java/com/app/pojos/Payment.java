@@ -8,6 +8,8 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Entity
@@ -21,7 +23,7 @@ public class Payment extends BaseEntity {
 	@Column(name = "status", length = 40)
 	private String status;
 	
-	
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name = "order_join")
 	@MapsId

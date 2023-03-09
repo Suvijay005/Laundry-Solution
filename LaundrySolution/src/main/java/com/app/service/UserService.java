@@ -11,6 +11,6 @@ public interface UserService {
     User addUser(User transientUser);
     User editUserDetails(User detachedUser);
     String deleteUser(Long id);
-    void changeRole(Role role, String email);
+    boolean changeRole(Role role, String email);
     
 }

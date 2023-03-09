@@ -6,6 +6,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Entity
@@ -17,6 +19,7 @@ public class LaundryItem extends BaseEntity {
 	private String name;
 	@Column(name = "price")
 	private double price;
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="laundryorderjoin")
 	private Order laundryorder;
