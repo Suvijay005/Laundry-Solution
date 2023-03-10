@@ -2,6 +2,7 @@ package com.app.service;
 
 import java.util.List;
 
+import com.app.dto.PaymentOrder;
 import com.app.pojos.Payment;
 
 public interface PaymentService {
@@ -10,7 +11,7 @@ public interface PaymentService {
 	
 	Payment getPaymentDetailsById(Long id);
 	
-	Payment addPayment(Payment transientPayment);
+	Payment addPayment(PaymentOrder dto);
 	
 	Payment editPaymentDetails(Payment detachedPayment);
 	

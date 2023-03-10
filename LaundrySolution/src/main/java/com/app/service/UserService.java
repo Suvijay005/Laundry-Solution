@@ -2,6 +2,7 @@ package com.app.service;
 
 import java.util.List;
 
+import com.app.dto.Credentials;
 import com.app.pojos.Role;
 import com.app.pojos.User;
 
@@ -12,5 +13,6 @@ public interface UserService {
     User editUserDetails(User detachedUser);
     String deleteUser(Long id);
     boolean changeRole(Role role, String email);
+    User validateUser(Credentials dto);
     
 }

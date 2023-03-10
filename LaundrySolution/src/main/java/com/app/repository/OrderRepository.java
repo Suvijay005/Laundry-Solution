@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.app.pojos.Order;
 
 public interface OrderRepository extends JpaRepository<Order, Long>{
-	 List<Order> findByPickupDate(LocalDateTime pickupdate);
+	 List<Order> findByPickupDateBetween(LocalDateTime startDate, LocalDateTime endDate);
 	 //List<Order> findByDeliveryDate(LocalDateTime deliverydate);
      List<Order> findByDeliveryDateBetween(LocalDateTime startDate, LocalDateTime endDate);
 

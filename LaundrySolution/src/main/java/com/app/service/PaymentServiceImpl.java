@@ -7,7 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.custom_exceptions.ResourceNotFoundException;
+import com.app.dto.PaymentOrder;
+import com.app.pojos.Order;
 import com.app.pojos.Payment;
+import com.app.repository.OrderRepository;
 import com.app.repository.PaymentRepository;
 
 @Service
@@ -16,7 +19,8 @@ public class PaymentServiceImpl implements PaymentService {
 	
 	@Autowired
 	private PaymentRepository paymentRepo;
-
+     @Autowired
+     private OrderRepository orderRepo;
 	@Override
 	public List<Payment> getAllPayments() {
 
@@ -33,8 +37,9 @@ public class PaymentServiceImpl implements PaymentService {
 	
 	
 	@Override
-	public Payment addPayment(Payment transientPayment) {
-		
+	public Payment addPayment(PaymentOrder dto) {
+		Order order=orderRepo.findById(dto.getId()).orElseThrow(()-> new ResourceNotFoundException("Order does not exist for this payment!"));
+	Payment transientPayment=new Payment(dto.getAmount(), dto.getPaymentMethod(), dto.getStatus(), order);
 		return paymentRepo.save(transientPayment);
 	}
 	

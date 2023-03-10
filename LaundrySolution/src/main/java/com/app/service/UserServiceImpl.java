@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.app.custom_exceptions.ResourceNotFoundException;
 import com.app.custom_exceptions.UserAlreadyExistsException;
+import com.app.dto.Credentials;
 import com.app.pojos.Role;
 import com.app.pojos.User;
 import com.app.repository.UserRepository;
@@ -35,7 +36,6 @@ public class UserServiceImpl implements UserService {
 	if(userRepo.existsByEmail(transientUser.getEmail())){
 		throw new UserAlreadyExistsException("Email already exists!");
 	}
-	transientUser.setPassword(transientUser.getEmail());
 		return userRepo.save(transientUser);
 	}
 	
@@ -65,7 +65,12 @@ public class UserServiceImpl implements UserService {
 		return true;
 		
 	}
-	 
-	
 
+	@Override
+	public User validateUser(Credentials dto) 
+	{
+		User valUser = userRepo.findByEmailAndPassword(dto.getEmail(),dto.getPassword())
+				.orElseThrow(() -> new ResourceNotFoundException("Bad Credentials !!!!"));
+		return valUser;
+	}
 }

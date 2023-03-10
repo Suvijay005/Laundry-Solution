@@ -2,6 +2,7 @@ package com.app.service;
 
 import java.util.List;
 
+import com.app.dto.LocationOrder;
 import com.app.pojos.Location;
 
 public interface LocationService {
@@ -10,7 +11,7 @@ public interface LocationService {
 	
 	Location getLocationById(Long id);
 	
-	Location addLocation(Location transientLocation);
+	Location addLocation(LocationOrder dto);
 	
 	Location editLocationDetails(Location detachedLocation);
 	

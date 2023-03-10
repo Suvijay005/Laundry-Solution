@@ -49,16 +49,16 @@ public class OrderServiceImpl implements OrderService{
 		throw new ResourceNotFoundException("Updation failed:Invalid orderId!");
 	}
 	@Override
-	public List<Order> getOrdersByPickupDate(LocalDateTime pickupdate1) {
+	public List<Order> getOrdersByPickupDate(String pickupdate1) {
 		
-		return orderRepo.findByPickupDate(pickupdate1);
+		return orderRepo.findByPickupDateBetween(LocalDateTime.parse(pickupdate1), LocalDateTime.parse(pickupdate1).plusDays(1));
 	}
 
 	
 	@Override
-	public List<Order> getOrdersByDeliveryupDate(LocalDateTime deliverydate1) {
+	public List<Order> getOrdersByDeliveryupDate(String deliverydate1) {
 		
-		return orderRepo.findByDeliveryDateBetween(deliverydate1, deliverydate1.plusDays(1));
+		return orderRepo.findByDeliveryDateBetween(LocalDateTime.parse(deliverydate1), LocalDateTime.parse(deliverydate1).plusDays(1));
 	}
 	
 	

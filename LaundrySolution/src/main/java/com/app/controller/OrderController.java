@@ -18,7 +18,7 @@ import com.app.pojos.Order;
 import com.app.service.OrderService;
 
 @RestController
-@CrossOrigin(origins = "https://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/orders")
 public class OrderController {
 
@@ -51,12 +51,12 @@ public class OrderController {
 	}
 
 	@GetMapping("/pickupdate/{date}")
-	public List<Order> getOrderByPickUpDate(@PathVariable LocalDateTime date) {
+	public List<Order> getOrderByPickUpDate(@PathVariable String date) {
 		return orderService.getOrdersByPickupDate(date);
 	}
 
 	@GetMapping("/deliverydate/{date}")
-	public List<Order> getOrdersByDeliveryDate(@PathVariable LocalDateTime date) {
+	public List<Order> getOrdersByDeliveryDate(@PathVariable String date) {
 		return orderService.getOrdersByDeliveryupDate(date);
 
 	}

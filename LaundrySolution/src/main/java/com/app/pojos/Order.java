@@ -20,6 +20,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "orders_tbl")
@@ -27,6 +28,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 public class Order extends BaseEntity {
 	@Column(name = "pickup_date", nullable = false)
 	private LocalDateTime pickupDate;

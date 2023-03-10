@@ -7,8 +7,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.custom_exceptions.ResourceNotFoundException;
+import com.app.dto.LocationOrder;
 import com.app.pojos.Location;
+import com.app.pojos.Order;
 import com.app.repository.LocationRepository;
+import com.app.repository.OrderRepository;
 
 @Service
 @Transactional
@@ -17,6 +20,9 @@ public class LocationServiceImpl implements LocationService {
 @Autowired
 private LocationRepository locationRepo;
 	
+@Autowired
+private OrderRepository orderRepo;
+
 	@Override
 		public List<Location> getAllLocation() {
 			
@@ -30,8 +36,9 @@ private LocationRepository locationRepo;
 		}
 	
 	@Override
-		public Location addLocation(Location transientLocation) {
-			
+		public Location addLocation(LocationOrder dto) {
+			Order order=orderRepo.findById(dto.getId()).orElseThrow(()-> new ResourceNotFoundException("Order not found for this location!"));
+			Location transientLocation=new Location(dto.getName(), dto.getAddress(), dto.getPhoneNumber(), order);
 			return locationRepo.save(transientLocation);
 		}
 	
