@@ -7,8 +7,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.custom_exceptions.ResourceNotFoundException;
+import com.app.dto.InventoryStaff;
 import com.app.pojos.Inventory;
+import com.app.pojos.Staff;
 import com.app.repository.InventoryRepository;
+import com.app.repository.StaffRepository;
 
 @Service
 @Transactional
@@ -17,6 +20,9 @@ public class InventoryServiceImpl implements InventoryService {
 	@Autowired
 	private InventoryRepository inventoryRepo;
 
+	@Autowired
+	private StaffRepository staffRepo;
+	
 	@Override
 	public List<Inventory> getCompleteInventory() {
 		
@@ -24,7 +30,10 @@ public class InventoryServiceImpl implements InventoryService {
 	}	
 	
 	@Override
-	public Inventory addInventory(Inventory transientInventory) {
+	public Inventory addInventory(InventoryStaff dto) {
+		Staff staff=staffRepo.findById(dto.getId()).orElseThrow(()-> new ResourceNotFoundException("Invalid staff id"));
+		Inventory transientInventory=new Inventory(dto.getProductName(),dto.getProductQuantity(), dto.getProductStock(), staff);
+		
 		return inventoryRepo.save(transientInventory);
 	}
 	

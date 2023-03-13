@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.dto.InventoryStaff;
 import com.app.pojos.Inventory;
 import com.app.service.InventoryService;
 
@@ -31,8 +32,8 @@ public class InventoryController {
 	}
 	
 	@PostMapping
-	public Inventory addNewInventory(@RequestBody Inventory transientInventory) {
-return inventoryService.addInventory(transientInventory);
+	public Inventory addNewInventory(@RequestBody InventoryStaff dto) {
+return inventoryService.addInventory(dto);
 	}
 	
 	@GetMapping("/{productname}")
